@@ -1,26 +1,469 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* -------------------------------------------------------------------------- */
+/* Type scale — SM base; overridden at MD / LG / XL / 2XL                     */
+/* Roles adapted from M3 (Display / Headline / Title / Body / Label)          */
+/* Brand face: Phudu · Plain face: Manrope                                    */
+/* -------------------------------------------------------------------------- */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Display — hero only */
+  --type-display-size: 1.625rem;
+  /* 26 */
+  --type-display-leading: 2.125rem;
+  /* 34 */
+  --type-display-tracking: -0.02em;
+  /* Lighter on small screens — 600 turns the wrapped headline into a dense block */
+  --type-display-weight: 500;
+
+  /* Headline */
+  --type-headline-lg-size: 1.75rem;
+  /* 28 */
+  --type-headline-lg-leading: 2.25rem;
+  /* 36 */
+  --type-headline-lg-tracking: -0.02em;
+  --type-headline-lg-weight: 600;
+
+  --type-headline-md-size: 1.5rem;
+  /* 24 */
+  --type-headline-md-leading: 2rem;
+  /* 32 */
+  --type-headline-md-tracking: -0.02em;
+  --type-headline-md-weight: 500;
+
+  --type-headline-sm-size: 1.25rem;
+  /* 20 */
+  --type-headline-sm-leading: 1.75rem;
+  /* 28 */
+  --type-headline-sm-tracking: -0.01em;
+  --type-headline-sm-weight: 600;
+
+  /* Title */
+  --type-title-lg-size: 1.125rem;
+  /* 18 */
+  --type-title-lg-leading: 1.625rem;
+  /* 26 */
+  --type-title-lg-tracking: -0.01em;
+  --type-title-lg-weight: 500;
+
+  --type-title-md-size: 1rem;
+  /* 16 */
+  --type-title-md-leading: 1.5rem;
+  /* 24 */
+  --type-title-md-tracking: 0;
+  --type-title-md-weight: 500;
+
+  /* Body */
+  /* Lead copy sits just under reading body on phones: it's a glanceable
+     subtitle beneath a large heading, not a passage to read through. */
+  --type-body-lg-size: 0.9375rem;
+  /* 15 */
+  --type-body-lg-leading: 1.375rem;
+  /* 22 */
+  --type-body-lg-tracking: 0;
+  --type-body-lg-weight: 400;
+
+  --type-body-md-size: 1rem;
+  /* 16 */
+  --type-body-md-leading: 1.5rem;
+  /* 24 */
+  --type-body-md-tracking: 0;
+  --type-body-md-weight: 400;
+
+  --type-body-sm-size: 0.875rem;
+  /* 14 */
+  --type-body-sm-leading: 1.25rem;
+  /* 20 */
+  --type-body-sm-tracking: 0.01em;
+  --type-body-sm-weight: 400;
+
+  /* Label */
+  --type-label-lg-size: 1rem;
+  /* 16 */
+  --type-label-lg-leading: 1.5rem;
+  /* 24 */
+  --type-label-lg-tracking: 0;
+  --type-label-lg-weight: 600;
+
+  --type-label-md-size: 0.875rem;
+  /* 14 */
+  --type-label-md-leading: 1.25rem;
+  /* 20 */
+  --type-label-md-tracking: 0;
+  --type-label-md-weight: 500;
+
+  --type-label-sm-size: 0.75rem;
+  /* 12 */
+  --type-label-sm-leading: 1rem;
+  /* 16 */
+  --type-label-sm-tracking: 0.02em;
+  --type-label-sm-weight: 500;
+
+  /* Vertical rhythm */
+  --space-type-tight: 0.75rem;
+  /* 12 */
+  --space-type-stack: 1rem;
+  /* 16 */
+  --space-type-action: 1.5rem;
+  /* 24 */
+  --space-section-y: 3rem;
+  /* 48 */
+}
+
+@media (min-width: 640px) {
+  :root {
+    --type-display-size: 2rem;
+    /* 32 */
+    --type-display-leading: 2.5rem;
+    /* 40 */
+
+    --type-body-lg-size: 1rem;
+    /* 16 */
+    --type-body-lg-leading: 1.5rem;
+    /* 24 */
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --type-display-size: 2.5rem;
+    /* 40 */
+    --type-display-leading: 3rem;
+    /* 48 */
+    --type-display-weight: 600;
+
+    --type-headline-lg-size: 2rem;
+    /* 32 */
+    --type-headline-lg-leading: 2.5rem;
+    /* 40 */
+
+    --type-headline-md-size: 1.75rem;
+    /* 28 */
+    --type-headline-md-leading: 2.25rem;
+    /* 36 */
+
+    --type-headline-sm-size: 1.375rem;
+    /* 22 */
+    --type-headline-sm-leading: 1.875rem;
+    /* 30 */
+
+    --type-title-lg-size: 1.25rem;
+    /* 20 */
+    --type-title-lg-leading: 1.75rem;
+    /* 28 */
+
+    --type-body-lg-size: 1.0625rem;
+    /* 17 */
+    --type-body-lg-leading: 1.625rem;
+    /* 26 */
+
+    --space-type-tight: 0.875rem;
+    --space-type-stack: 1.25rem;
+    --space-type-action: 1.75rem;
+    --space-section-y: 4rem;
+    /* 64 */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    /* Display holds at 40/48 — the hero splits into two columns here */
+
+    --type-headline-lg-size: 2.25rem;
+    /* 36 */
+    --type-headline-lg-leading: 2.75rem;
+    /* 44 */
+
+    --type-headline-md-size: 1.875rem;
+    /* 30 */
+    --type-headline-md-leading: 2.375rem;
+    /* 38 */
+
+    --type-headline-sm-size: 1.5rem;
+    /* 24 */
+    --type-headline-sm-leading: 2rem;
+    /* 32 */
+
+    --type-title-lg-size: 1.375rem;
+    /* 22 */
+    --type-title-lg-leading: 1.75rem;
+    /* 28 */
+
+    --type-body-lg-size: 1.125rem;
+    /* 18 */
+    --type-body-lg-leading: 1.6875rem;
+    /* 27 */
+
+    --type-body-sm-leading: 1.3125rem;
+    /* 21 */
+
+    --space-type-tight: 1rem;
+    --space-type-stack: 1.5rem;
+    --space-type-action: 2rem;
+    --space-section-y: 5rem;
+    /* 80 */
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --type-display-size: 2.75rem;
+    /* 44 */
+    --type-display-leading: 3.25rem;
+    /* 52 */
+
+    --type-headline-lg-size: 2.5rem;
+    /* 40 */
+    --type-headline-lg-leading: 3rem;
+    /* 48 */
+
+    --type-headline-md-size: 2rem;
+    /* 32 */
+    --type-headline-md-leading: 2.5rem;
+    /* 40 */
+
+    --space-section-y: 6rem;
+    /* 96 */
+  }
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --type-display-size: 3rem;
+    /* 48 */
+    --type-display-leading: 3.5rem;
+    /* 56 */
+
+    --type-body-lg-leading: 1.75rem;
+    /* 28 */
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-heading: var(--font-phudu);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-lime: var(--accent-lime);
+  --color-accent-lavender: var(--accent-lavender);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-light: var(--brand-light);
+  --container-site: 82rem;
+  /* 1440px */
+  --spacing-gutter: 1rem;
+  /* 16px mobile */
+  --spacing-gutter-lg: 2rem;
+  /* 24px desktop */
+  --spacing-type-tight: var(--space-type-tight);
+  --spacing-type-stack: var(--space-type-stack);
+  --spacing-type-action: var(--space-type-action);
+  --spacing-section-y: var(--space-section-y);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Typography utilities — role-based (M3-adapted) */
+  --text-display: var(--type-display-size);
+  --text-display--line-height: var(--type-display-leading);
+  --text-display--letter-spacing: var(--type-display-tracking);
+  --text-display--font-weight: var(--type-display-weight);
+
+  --text-headline-lg: var(--type-headline-lg-size);
+  --text-headline-lg--line-height: var(--type-headline-lg-leading);
+  --text-headline-lg--letter-spacing: var(--type-headline-lg-tracking);
+  --text-headline-lg--font-weight: var(--type-headline-lg-weight);
+
+  --text-headline-md: var(--type-headline-md-size);
+  --text-headline-md--line-height: var(--type-headline-md-leading);
+  --text-headline-md--letter-spacing: var(--type-headline-md-tracking);
+  --text-headline-md--font-weight: var(--type-headline-md-weight);
+
+  --text-headline-sm: var(--type-headline-sm-size);
+  --text-headline-sm--line-height: var(--type-headline-sm-leading);
+  --text-headline-sm--letter-spacing: var(--type-headline-sm-tracking);
+  --text-headline-sm--font-weight: var(--type-headline-sm-weight);
+
+  --text-title-lg: var(--type-title-lg-size);
+  --text-title-lg--line-height: var(--type-title-lg-leading);
+  --text-title-lg--letter-spacing: var(--type-title-lg-tracking);
+  --text-title-lg--font-weight: var(--type-title-lg-weight);
+
+  --text-title-md: var(--type-title-md-size);
+  --text-title-md--line-height: var(--type-title-md-leading);
+  --text-title-md--letter-spacing: var(--type-title-md-tracking);
+  --text-title-md--font-weight: var(--type-title-md-weight);
+
+  --text-body-lg: var(--type-body-lg-size);
+  --text-body-lg--line-height: var(--type-body-lg-leading);
+  --text-body-lg--letter-spacing: var(--type-body-lg-tracking);
+  --text-body-lg--font-weight: var(--type-body-lg-weight);
+
+  --text-body-md: var(--type-body-md-size);
+  --text-body-md--line-height: var(--type-body-md-leading);
+  --text-body-md--letter-spacing: var(--type-body-md-tracking);
+  --text-body-md--font-weight: var(--type-body-md-weight);
+
+  --text-body-sm: var(--type-body-sm-size);
+  --text-body-sm--line-height: var(--type-body-sm-leading);
+  --text-body-sm--letter-spacing: var(--type-body-sm-tracking);
+  --text-body-sm--font-weight: var(--type-body-sm-weight);
+
+  --text-label-lg: var(--type-label-lg-size);
+  --text-label-lg--line-height: var(--type-label-lg-leading);
+  --text-label-lg--letter-spacing: var(--type-label-lg-tracking);
+  --text-label-lg--font-weight: var(--type-label-lg-weight);
+
+  --text-label-md: var(--type-label-md-size);
+  --text-label-md--line-height: var(--type-label-md-leading);
+  --text-label-md--letter-spacing: var(--type-label-md-tracking);
+  --text-label-md--font-weight: var(--type-label-md-weight);
+
+  --text-label-sm: var(--type-label-sm-size);
+  --text-label-sm--line-height: var(--type-label-sm-leading);
+  --text-label-sm--letter-spacing: var(--type-label-sm-tracking);
+  --text-label-sm--font-weight: var(--type-label-sm-weight);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #def2fe;
+  --foreground: #051a2f;
+  --card: #ffffff;
+  --card-foreground: #051a2f;
+  --popover: #ffffff;
+  --popover-foreground: #051a2f;
+  --primary: #384cbc;
+  --primary-foreground: #ffffff;
+  --secondary: #def2fe;
+  --secondary-foreground: #051a2f;
+  --muted: #def2fe;
+  --muted-foreground: #051a2f;
+  --accent: #b5aafd;
+  --accent-foreground: #051a2f;
+  --destructive: #ff8f27;
+  --border: #d8dae6;
+  --input: #d8dae6;
+  --ring: #384cbc;
+  --chart-1: #384cbc;
+  --chart-2: #ff8f27;
+  --chart-3: #bffd3b;
+  --chart-4: #b5aafd;
+  --chart-5: #ffe459;
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #051a2f;
+  --sidebar-primary: #384cbc;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #def2fe;
+  --sidebar-accent-foreground: #051a2f;
+  --sidebar-border: #d8dae6;
+  --sidebar-ring: #384cbc;
+
+  /* Brand palette */
+  --accent-orange: #ff8f27;
+  --accent-lime: #bffd3b;
+  --accent-lavender: #b5aafd;
+  --accent-yellow: #ffe459;
+  --brand-dark: #051a2f;
+  --brand-light: #def2fe;
+}
+
+.dark {
+  --background: #051a2f;
+  --foreground: #ffffff;
+  --card: #0a2340;
+  --card-foreground: #ffffff;
+  --popover: #0a2340;
+  --popover-foreground: #ffffff;
+  --primary: #384cbc;
+  --primary-foreground: #ffffff;
+  --secondary: #0a2340;
+  --secondary-foreground: #ffffff;
+  --muted: #0a2340;
+  --muted-foreground: #def2fe;
+  --accent: #b5aafd;
+  --accent-foreground: #051a2f;
+  --destructive: #ff8f27;
+  --border: #ffffff1a;
+  --input: #ffffff26;
+  --ring: #384cbc;
+  --chart-1: #384cbc;
+  --chart-2: #ff8f27;
+  --chart-3: #bffd3b;
+  --chart-4: #b5aafd;
+  --chart-5: #ffe459;
+  --sidebar: #0a2340;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #384cbc;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #051a2f;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #ffffff1a;
+  --sidebar-ring: #384cbc;
+
+  --accent-orange: #ff8f27;
+  --accent-lime: #bffd3b;
+  --accent-lavender: #b5aafd;
+  --accent-yellow: #ffe459;
+  --brand-dark: #051a2f;
+  --brand-light: #def2fe;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground text-body-md;
+  }
+
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .site-grid {
+    @apply mx-auto grid w-full max-w-site grid-cols-4 gap-gutter px-gutter md:grid-cols-12 md:gap-gutter-lg md:px-gutter-lg;
+  }
 }
