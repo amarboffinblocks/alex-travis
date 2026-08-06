@@ -18,10 +18,13 @@ type Testimonial = {
 };
 
 const toneClass: Record<Tone, string> = {
-  lavender: "bg-accent-lavender",
-  lime: "bg-accent-lime",
-  yellow: "bg-accent-yellow",
-  orange: "bg-accent-orange",
+  lavender:
+    "bg-[color-mix(in_srgb,var(--accent-lavender)_55%,white_45%)]",
+  lime: "bg-[color-mix(in_srgb,var(--accent-lime)_50%,white_50%)]",
+  yellow:
+    "bg-[color-mix(in_srgb,var(--accent-yellow)_52%,white_48%)]",
+  orange:
+    "bg-[color-mix(in_srgb,var(--accent-orange)_48%,white_52%)]",
 };
 
 const TESTIMONIALS: Testimonial[] = [
@@ -75,16 +78,26 @@ function TestimonialCard({ item }: { item: Testimonial }) {
 
       <div
         className={cn(
-          "flex flex-1 flex-col gap-3 rounded-2xl px-4 py-4 sm:px-5 sm:py-4",
+          "relative flex flex-1 flex-col gap-4 overflow-hidden rounded-2xl px-4 py-5 sm:px-5 sm:py-5",
           toneClass[item.tone]
         )}
       >
-        <Text role="body-md" className="text-pretty text-brand-dark">
-          “{item.quote}”
+        <span
+          aria-hidden
+          className="pointer-events-none absolute top-2 left-3 font-heading text-5xl leading-none text-brand-dark/15 select-none"
+        >
+          “
+        </span>
+
+        <Text
+          role="body-lg"
+          className="relative pt-4 text-pretty font-medium text-brand-dark"
+        >
+          {item.quote}
         </Text>
 
-        <footer className="mt-auto flex items-center gap-3 border-t border-dashed border-brand-dark/20 pt-3">
-          <div className="relative size-10 shrink-0 overflow-hidden rounded-full border border-brand-dark/20">
+        <footer className="relative mt-auto flex items-center gap-3 border-t border-dashed border-brand-dark/25 pt-3">
+          <div className="relative size-10 shrink-0 overflow-hidden rounded-full border border-brand-dark/25">
             <Image
               src={item.avatar}
               alt=""
@@ -97,7 +110,7 @@ function TestimonialCard({ item }: { item: Testimonial }) {
             <Heading as="cite" role="title-md" className="not-italic">
               {item.name}
             </Heading>
-            <Text as="span" role="body-sm" className="text-brand-dark/65">
+            <Text as="span" role="body-sm" className="text-brand-dark/70">
               {item.role}, {item.company}
             </Text>
           </div>
