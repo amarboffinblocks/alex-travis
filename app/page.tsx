@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/sections/hero-section";
 import { StatsSection } from "@/components/sections/stats-section";
+import { WhatIBuildSection } from "@/components/sections/what-i-build-section";
 import { SiteHeader } from "@/components/layout/site-header";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <SiteHeader />
       <HeroSection />
       <StatsSection />
+      <WhatIBuildSection />
     </main>
   );
 }
