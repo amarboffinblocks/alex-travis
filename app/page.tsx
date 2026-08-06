@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/sections/hero-section";
+import { SelectedWorkSection } from "@/components/sections/selected-work-section";
 import { StatsSection } from "@/components/sections/stats-section";
 import { WhatIBuildSection } from "@/components/sections/what-i-build-section";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <WhatIBuildSection />
+      <SelectedWorkSection />
     </main>
   );
 }
