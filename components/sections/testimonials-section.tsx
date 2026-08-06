@@ -124,7 +124,10 @@ const TestimonialsSection = () => {
   const loop = [...TESTIMONIALS, ...TESTIMONIALS];
 
   return (
-    <section className="relative z-10 border-b border-dashed border-primary/50 bg-brand-light">
+    <section
+      id="testimonials"
+      className="relative z-10 border-b border-dashed border-primary/50 bg-brand-light"
+    >
       <Container px={false} crossings={["tl", "tr", "bl", "br"]}>
         <SectionBand size="md" />
 

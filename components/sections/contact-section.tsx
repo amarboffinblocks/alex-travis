@@ -16,7 +16,10 @@ const LINKS = [
 
 const ContactSection = () => {
   return (
-    <section className="relative z-10 border-b border-dashed border-primary/50 bg-brand-light">
+    <section
+      id="contact"
+      className="relative z-10 border-b border-dashed border-primary/50 bg-brand-light"
+    >
       <Container px={false} crossings={["tl", "tr", "bl", "br"]}>
         <SectionBand size="md" />
 

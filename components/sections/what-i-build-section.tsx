@@ -75,7 +75,10 @@ const badgeClass: Record<Capability["badgeTone"], string> = {
 
 const WhatIBuildSection = () => {
   return (
-    <section className="relative z-10 border-b border-dashed border-primary/50 bg-brand-light">
+    <section
+      id="what-i-build"
+      className="relative z-10 border-b border-dashed border-primary/50 bg-brand-light"
+    >
       <Container px={false} crossings={["tl", "tr", "bl", "br"]}>
         <SectionBand size="md" />
 
