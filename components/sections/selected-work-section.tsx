@@ -1,67 +1,63 @@
 import { ArrowUpRight } from "lucide-react";
 
+import { ProjectCard } from "@/components/cards/project-card";
 import { Container } from "@/components/layout/container";
-import { DotGrid } from "@/components/layout/dot-grid";
 import { GridCrossing } from "@/components/layout/grid-crossing";
 import { SectionBand } from "@/components/layout/section-band";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
-type Project = {
-  title: string;
-  category: string;
-  year: string;
-  outcome: string;
-  stack: string[];
-  tone: "lime" | "lavender" | "yellow" | "orange";
-};
-
-const PROJECTS: Project[] = [
+const PROJECTS = [
   {
     title: "Atlas Copilot",
+    slug: "atlas-copilot",
     category: "Generative AI",
     year: "2025",
     outcome:
       "RAG-powered knowledge assistant with evals, citations, and streaming chat in production.",
     stack: ["Next.js", "Python", "RAG", "Postgres"],
-    tone: "lavender",
+    image:
+      "https://cdn.prod.website-files.com/687679789a6a882bd656624c/687941bcfc5121a9a165cc08_Work%20Image%2008.avif",
+    imageAlt: "Atlas Copilot project preview",
   },
   {
     title: "Ledger Cloud",
+    slug: "ledger-cloud",
     category: "Fullstack Product",
     year: "2025",
     outcome:
       "Multi-tenant SaaS with auth, billing, and realtime dashboards shipped end-to-end.",
     stack: ["Next.js", "Node", "Stripe", "Postgres"],
-    tone: "lime",
+    image:
+      "https://cdn.prod.website-files.com/687679789a6a882bd656624c/6879418ca5e97d46446574b3_Work%20Image%2007.avif",
+    imageAlt: "Ledger Cloud project preview",
   },
   {
     title: "Orbit Agents",
+    slug: "orbit-agents",
     category: "AI Systems",
     year: "2024",
     outcome:
       "Multi-agent workflows with tool calling, human-in-the-loop, and cost controls.",
     stack: ["Agents", "LLMs", "Queues", "Observability"],
-    tone: "yellow",
+    image:
+      "https://cdn.prod.website-files.com/687679789a6a882bd656624c/68794153d3bfe2542abfad5a_Work%20Image%2006.avif",
+    imageAlt: "Orbit Agents project preview",
   },
   {
     title: "Pulse Board",
+    slug: "pulse-board",
     category: "Fullstack Product",
     year: "2024",
     outcome:
       "Realtime ops board for teams — live updates, roles, and API-first architecture.",
     stack: ["React", "WebSockets", "Redis", "API"],
-    tone: "orange",
+    image:
+      "https://cdn.prod.website-files.com/687679789a6a882bd656624c/688b5ddc99a6f0d52b0fdedf_Project%20Image%2007.avif",
+    imageAlt: "Pulse Board project preview",
   },
-];
-
-const toneClass: Record<Project["tone"], string> = {
-  lime: "bg-accent-lime/40",
-  lavender: "bg-accent-lavender/40",
-  yellow: "bg-accent-yellow/40",
-  orange: "bg-accent-orange/30",
-};
+] as const;
 
 const SelectedWorkSection = () => {
   return (
@@ -101,15 +97,14 @@ const SelectedWorkSection = () => {
 
           return (
             <article
-              key={project.title}
+              key={project.slug}
               className={cn(
-                "relative col-span-4 flex flex-col gap-5 border-dashed border-primary/50 px-gutter py-10 lg:col-span-6 lg:gap-6 lg:px-gutter-lg lg:py-12",
+                "relative col-span-4 border-dashed border-primary/50 px-gutter py-10 lg:col-span-6 lg:px-gutter-lg lg:py-12",
                 isLeftCol && "lg:border-r",
                 isTopRow && "lg:border-b",
                 !isLast && "max-lg:border-b"
               )}
             >
-              {/* Vertical divider (desktop) — owned by left column */}
               {isLeftCol && isTopRow && (
                 <>
                   <GridCrossing at="tr" className="hidden lg:block" />
@@ -123,8 +118,6 @@ const SelectedWorkSection = () => {
                   className="hidden lg:block"
                 />
               )}
-
-              {/* Row divider meets outer rails (desktop) */}
               {isTopRow && isLeftCol && (
                 <GridCrossing
                   at="bl"
@@ -139,8 +132,6 @@ const SelectedWorkSection = () => {
                   className="hidden lg:block"
                 />
               )}
-
-              {/* Mobile stacked row ends */}
               {!isLast && (
                 <>
                   <GridCrossing at="bl" clip="left" className="lg:hidden" />
@@ -148,51 +139,7 @@ const SelectedWorkSection = () => {
                 </>
               )}
 
-              <div
-                className={cn(
-                  "relative aspect-[16/10] overflow-hidden rounded-2xl",
-                  toneClass[project.tone]
-                )}
-              >
-                <DotGrid className="text-brand-dark/20" />
-                <div className="absolute inset-0 flex items-end justify-between p-4 sm:p-5">
-                  <Text as="span" role="label-sm" tone="default">
-                    {project.category}
-                  </Text>
-                  <Text as="span" role="label-sm" tone="subtle">
-                    {project.year}
-                  </Text>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <div className="flex items-start justify-between gap-3">
-                  <Heading as="h3" role="title-lg">
-                    {project.title}
-                  </Heading>
-                  <ArrowUpRight
-                    aria-hidden
-                    className="mt-1 size-5 shrink-0 text-primary"
-                  />
-                </div>
-                <Text role="body-sm" tone="muted" className="max-w-md">
-                  {project.outcome}
-                </Text>
-              </div>
-
-              <ul className="mt-auto flex flex-wrap gap-2">
-                {project.stack.map((item) => (
-                  <li key={item}>
-                    <Text
-                      as="span"
-                      role="label-sm"
-                      className="inline-flex rounded-md border border-dashed border-primary/40 px-2 py-1 text-brand-dark/70"
-                    >
-                      {item}
-                    </Text>
-                  </li>
-                ))}
-              </ul>
+              <ProjectCard {...project} />
             </article>
           );
         })}
