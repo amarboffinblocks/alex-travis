@@ -301,6 +301,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-marquee: marquee 36s linear infinite;
 
   /* Typography utilities — role-based (M3-adapted) */
   --text-display: var(--type-display-size);
@@ -465,5 +466,15 @@
 @layer utilities {
   .site-grid {
     @apply mx-auto grid w-full max-w-site grid-cols-4 gap-gutter px-gutter md:grid-cols-12 md:gap-gutter-lg md:px-gutter-lg;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
   }
 }

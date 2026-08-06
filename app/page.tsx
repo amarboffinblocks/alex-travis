@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { SelectedWorkSection } from "@/components/sections/selected-work-section";
 import { StatsSection } from "@/components/sections/stats-section";
 import { TechStackSection } from "@/components/sections/tech-stack-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { WhatIBuildSection } from "@/components/sections/what-i-build-section";
 import { SiteHeader } from "@/components/layout/site-header";
 
@@ -17,6 +18,7 @@ export default function Home() {
       <SelectedWorkSection />
       <TechStackSection />
       {/* <ExperienceSection /> */}
+      <TestimonialsSection />
       <ContactSection />
     </main>
   );
