@@ -82,10 +82,7 @@ const SelectedWorkSection = () => {
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:items-end">
-            <Text role="body-md" tone="muted" className="max-w-xs lg:text-right">
-              A short list of fullstack and generative AI work — problem,
-              build, and outcome.
-            </Text>
+
             <Button variant="outline" size="sm" className="w-fit rounded-md">
               View all
               <ArrowUpRight data-icon="inline-end" className="size-4" />

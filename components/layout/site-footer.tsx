@@ -43,7 +43,7 @@ function SiteFooter() {
         {/* Bio / CTA */}
         <div
           className={cn(
-            "relative col-span-4 flex flex-col gap-type-stack border-b px-gutter py-8 lg:col-span-5 lg:border-r lg:px-gutter-lg lg:py-10",
+            "relative col-span-4 flex flex-col gap-type-stack border-b px-gutter py-6 lg:col-span-5 lg:border-r lg:px-gutter-lg lg:py-10",
             cellBorder
           )}
         >
@@ -96,14 +96,14 @@ function SiteFooter() {
         {/* Pages */}
         <div
           className={cn(
-            "relative col-span-2 flex flex-col gap-3 border-b px-gutter py-8 lg:col-span-3 lg:border-r lg:px-gutter-lg lg:py-10",
+            "relative col-span-4 flex flex-col gap-2.5 border-b px-gutter py-5 sm:col-span-2 sm:py-6 lg:col-span-3 lg:gap-3 lg:border-r lg:px-gutter-lg lg:py-8",
             cellBorder
           )}
         >
           <Text as="span" role="label-sm" className="text-white/50">
             Pages
           </Text>
-          <ul className="flex flex-col gap-2">
+          <ul className="flex flex-wrap gap-x-4 gap-y-2 sm:flex-col sm:gap-2">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className={linkClass}>
@@ -117,48 +117,48 @@ function SiteFooter() {
         {/* Contact + social */}
         <div
           className={cn(
-            "relative col-span-2 flex flex-col border-b lg:col-span-4",
+            "relative col-span-4 flex flex-col border-b sm:col-span-2 lg:col-span-4",
             cellBorder
           )}
         >
-          <div className="flex flex-col gap-6 px-gutter py-8 lg:px-gutter-lg lg:py-10">
-            <div className="flex flex-col gap-3">
+          <div className="relative flex flex-col gap-4 px-gutter py-5 sm:gap-5 sm:py-6 lg:gap-4 lg:px-gutter-lg lg:py-8">
+            <div className="flex min-w-0 flex-col gap-2">
               <Text as="span" role="label-sm" className="text-white/50">
                 Contact
               </Text>
-              <ul className="flex flex-col gap-3">
-                <li>
+              <ul className="flex min-w-0 flex-col gap-2">
+                <li className="min-w-0">
                   <a
                     href={`mailto:${EMAIL}`}
                     className={cn(
                       linkClass,
-                      "group inline-flex items-center gap-2.5"
+                      "group inline-flex max-w-full items-center gap-2"
                     )}
                   >
-                    <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors group-hover:border-white/40 group-hover:text-white">
+                    <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors group-hover:border-white/40 group-hover:text-white">
                       <Mail className="size-3.5" aria-hidden />
                     </span>
-                    {EMAIL}
+                    <span className="min-w-0 break-all">{EMAIL}</span>
                   </a>
                 </li>
-                <li>
+                <li className="min-w-0">
                   <a
                     href={PHONE_HREF}
                     className={cn(
                       linkClass,
-                      "group inline-flex items-center gap-2.5"
+                      "group inline-flex max-w-full items-center gap-2"
                     )}
                   >
-                    <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors group-hover:border-white/40 group-hover:text-white">
+                    <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors group-hover:border-white/40 group-hover:text-white">
                       <Phone className="size-3.5" aria-hidden />
                     </span>
-                    {PHONE}
+                    <span className="min-w-0 break-words">{PHONE}</span>
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               <Text as="span" role="label-sm" className="text-white/50">
                 Social
               </Text>
@@ -172,9 +172,9 @@ function SiteFooter() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={link.label}
-                        className="inline-flex size-10 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors hover:border-white/40 hover:bg-white/10 hover:text-white"
+                        className="inline-flex size-8 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors hover:border-white/40 hover:bg-white/10 hover:text-white"
                       >
-                        <Icon className="size-4" />
+                        <Icon className="size-3.5" />
                       </a>
                     </li>
                   );
@@ -182,6 +182,8 @@ function SiteFooter() {
               </ul>
             </div>
           </div>
+
+          {/* Desktop-only dotted filler under contact — matches row height */}
           <div className="relative mt-auto hidden min-h-24 flex-1 overflow-hidden border-t border-dashed border-white/20 lg:block">
             <DotGrid className="text-white/15" />
           </div>

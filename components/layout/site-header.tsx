@@ -7,6 +7,7 @@ import { Menu } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { DotGrid } from "@/components/layout/dot-grid";
+import { GridCrossing } from "@/components/layout/grid-crossing";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -27,12 +28,20 @@ function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-dashed border-primary/40 bg-brand-light/95 backdrop-blur-sm">
-      <div className="relative overflow-hidden">
-        <DotGrid className="text-brand-dark/10" />
+      <div className="relative">
+        {/* Dot grid clipped separately so corner stars are not cut off */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <DotGrid className="text-brand-dark/10" />
+        </div>
+
         <Container
           px={false}
           className="relative flex items-center justify-between gap-4 bg-brand-light px-gutter py-3 lg:px-gutter-lg lg:py-3.5"
         >
+          {/* Rails meet the header bottom rule — full stars, not clipped halves */}
+          <GridCrossing at="bl" />
+          <GridCrossing at="br" />
+
           {/* Left — avatar + nav */}
           <div className="relative z-10 flex min-w-0 items-center gap-4 sm:gap-5">
             <Link
@@ -40,7 +49,6 @@ function SiteHeader() {
               aria-label="Home"
               className="relative shrink-0 transition-opacity hover:opacity-90"
             >
-              {/* Yellow brand blob behind the avatar */}
               <span
                 aria-hidden
                 className="absolute top-1/2 left-1/2 size-11 -translate-x-[42%] -translate-y-[58%] rotate-[-18deg] rounded-xl bg-accent-yellow"

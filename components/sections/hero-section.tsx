@@ -10,7 +10,7 @@ const PROFILE_IMAGE =
 const HeroSection = () => {
   return (
     <section className="border-b border-dashed border-primary/50  bg-brand-light relative z-10 ">
-      <Container px={false} crossings={["tl", "tr", "bl", "br"]}>
+      <Container px={false} crossings={["bl", "br"]}>
         {/* Left — copy */}
         <div className="relative col-span-4 flex flex-col justify-center gap-type-stack border-b border-dashed border-primary/50 px-gutter py-section-y lg:col-span-6 lg:border-r lg:border-b-0 lg:px-gutter-lg">
           {/* Ends of this column's divider: horizontal on mobile, vertical from lg.
