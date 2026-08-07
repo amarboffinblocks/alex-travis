@@ -8,13 +8,30 @@ type Stat = {
   /** Rendered in a lighter tone so the figure itself stays dominant. */
   suffix?: string;
   label: string;
+  highlight?: boolean;
 };
 
 const STATS: Stat[] = [
-  { value: "90", suffix: "%", label: "Trust us for their next project" },
-  { value: "200", suffix: "+", label: "Building quality products" },
-  { value: "2018", label: "6 years impactful experience" },
-  { value: "80", suffix: "+", label: "Outstanding product" },
+
+  {
+    value: "3",
+    suffix: "+",
+    label: "Years of experience",
+    // highlight: true,
+  },
+  {
+    value: "100",
+    suffix: "%",
+    label: "Trust us for their next project",
+    highlight: true,
+
+  },
+  {
+    value: "11", suffix: "+", label: "Building quality products",
+
+  },
+
+  { value: "4", label: "Outstanding product" },
 ];
 
 const StatsSection = () => {
@@ -26,6 +43,7 @@ const StatsSection = () => {
           const opensMobileRow = index % 2 === 0;
           const inFirstMobileRow = index < 2;
           const isLast = index === STATS.length - 1;
+          const isHighlight = Boolean(stat.highlight);
 
           return (
             <div
@@ -35,7 +53,8 @@ const StatsSection = () => {
                 opensMobileRow && "border-r",
                 inFirstMobileRow && "border-b",
                 "lg:border-b-0",
-                isLast ? "lg:border-r-0" : "lg:border-r"
+                isLast ? "lg:border-r-0" : "lg:border-r",
+                isHighlight && "bg-accent-yellow"
               )}
             >
               {/* Where this cell's rules end. Arms with no rule behind them are clipped. */}
@@ -67,10 +86,20 @@ const StatsSection = () => {
               <Heading as="p" role="headline-md">
                 {stat.value}
                 {stat.suffix && (
-                  <span className="text-brand-dark/50">{stat.suffix}</span>
+                  <span
+                    className={
+                      isHighlight ? "text-brand-dark/45" : "text-brand-dark/50"
+                    }
+                  >
+                    {stat.suffix}
+                  </span>
                 )}
               </Heading>
-              <Text role="body-sm" tone="muted">
+              <Text
+                role="body-sm"
+                tone={isHighlight ? "default" : "muted"}
+                className={isHighlight ? "text-brand-dark/70" : undefined}
+              >
                 {stat.label}
               </Text>
             </div>
