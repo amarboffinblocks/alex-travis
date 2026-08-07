@@ -1,35 +1,28 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useState } from "react";
-import { ArrowUpRight, Check, Copy } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 
+import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons/social-icons";
 import { Container } from "@/components/layout/container";
 import { DotGrid } from "@/components/layout/dot-grid";
 import { SectionBand } from "@/components/layout/section-band";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/ui/typography";
+import {
+  EMAIL,
+  NAV_LINKS,
+  PHONE,
+  PHONE_HREF,
+  PROFILE_IMAGE,
+  SOCIAL_LINKS,
+} from "@/lib/site-nav";
 import { cn } from "@/lib/utils";
 
-const PROFILE_IMAGE =
-  "https://cdn.prod.website-files.com/68702569b799febef1f58c88/6874024ecca5623a42ccd83f_03e5e77fc0cfea4491d607a4741fadfb_Profile%2002.avif";
-
-const EMAIL = "hello@example.com";
-
-const PAGE_LINKS = [
-  { label: "Work", href: "#selected-work" },
-  { label: "What I build", href: "#what-i-build" },
-  { label: "Stack", href: "#tech-stack" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
-] as const;
-
-const SOCIAL_LINKS = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "X / Twitter", href: "https://x.com" },
-] as const;
+const SOCIAL_ICONS = {
+  GitHub: GitHubIcon,
+  LinkedIn: LinkedInIcon,
+  "X / Twitter": XIcon,
+} as const;
 
 const cellBorder = "border-dashed border-white/25";
 const linkClass =
@@ -37,20 +30,9 @@ const linkClass =
 
 function SiteFooter() {
   const year = new Date().getFullYear();
-  const [copied, setCopied] = useState(false);
-
-  const copyEmail = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1600);
-    } catch {
-      setCopied(false);
-    }
-  }, []);
 
   return (
-    <footer className="relative z-10 bg-primary">
+    <footer id="contact" className="relative z-10 bg-primary">
       <Container px={false} className="border-white/25">
         <SectionBand
           size="md"
@@ -94,8 +76,8 @@ function SiteFooter() {
             <Button
               nativeButton={false}
               render={<a href={`mailto:${EMAIL}`} />}
-              size="lg"
-              className="w-fit rounded-md border-transparent bg-linear-to-r from-accent-lavender via-accent-orange to-accent-yellow text-brand-dark hover:opacity-90"
+              className="w-fit rounded-md"
+              variant={"secondary"}
             >
               Hire Me!
             </Button>
@@ -108,36 +90,6 @@ function SiteFooter() {
               See my work
               <ArrowUpRight data-icon="inline-end" className="size-4" />
             </Button>
-          </div>
-
-          <div className="flex flex-col gap-2 border-t border-dashed border-white/20 pt-5">
-            <Text as="span" role="label-sm" className="text-white/50">
-              Email me
-            </Text>
-            <div className="flex flex-wrap items-center gap-2">
-              <Button
-                variant="link"
-                nativeButton={false}
-                render={<a href={`mailto:${EMAIL}`} />}
-                className="h-auto px-0 text-body-sm text-white hover:text-white/80"
-              >
-                {EMAIL}
-              </Button>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon-sm"
-                aria-label={copied ? "Email copied" : "Copy email"}
-                onClick={copyEmail}
-                className="rounded-md text-white/60 hover:bg-white/10 hover:text-white"
-              >
-                {copied ? (
-                  <Check className="size-3.5 text-accent-lime" />
-                ) : (
-                  <Copy className="size-3.5" />
-                )}
-              </Button>
-            </div>
           </div>
         </div>
 
@@ -152,7 +104,7 @@ function SiteFooter() {
             Pages
           </Text>
           <ul className="flex flex-col gap-2">
-            {PAGE_LINKS.map((link) => (
+            {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className={linkClass}>
                   {link.label}
@@ -162,38 +114,73 @@ function SiteFooter() {
           </ul>
         </div>
 
-        {/* Social + dots */}
+        {/* Contact + social */}
         <div
           className={cn(
             "relative col-span-2 flex flex-col border-b lg:col-span-4",
             cellBorder
           )}
         >
-          <div className="flex flex-col gap-3 px-gutter py-8 lg:px-gutter-lg lg:py-10">
-            <Text as="span" role="label-sm" className="text-white/50">
-              Social
-            </Text>
-            <ul className="flex flex-col gap-2">
-              {SOCIAL_LINKS.map((link) => (
-                <li key={link.href}>
+          <div className="flex flex-col gap-6 px-gutter py-8 lg:px-gutter-lg lg:py-10">
+            <div className="flex flex-col gap-3">
+              <Text as="span" role="label-sm" className="text-white/50">
+                Contact
+              </Text>
+              <ul className="flex flex-col gap-3">
+                <li>
                   <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`mailto:${EMAIL}`}
                     className={cn(
                       linkClass,
-                      "group inline-flex items-center gap-1.5"
+                      "group inline-flex items-center gap-2.5"
                     )}
                   >
-                    {link.label}
-                    <ArrowUpRight
-                      aria-hidden
-                      className="size-3.5 text-white/50 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white"
-                    />
+                    <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors group-hover:border-white/40 group-hover:text-white">
+                      <Mail className="size-3.5" aria-hidden />
+                    </span>
+                    {EMAIL}
                   </a>
                 </li>
-              ))}
-            </ul>
+                <li>
+                  <a
+                    href={PHONE_HREF}
+                    className={cn(
+                      linkClass,
+                      "group inline-flex items-center gap-2.5"
+                    )}
+                  >
+                    <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors group-hover:border-white/40 group-hover:text-white">
+                      <Phone className="size-3.5" aria-hidden />
+                    </span>
+                    {PHONE}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <Text as="span" role="label-sm" className="text-white/50">
+                Social
+              </Text>
+              <ul className="flex flex-wrap items-center gap-2">
+                {SOCIAL_LINKS.map((link) => {
+                  const Icon = SOCIAL_ICONS[link.label];
+                  return (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={link.label}
+                        className="inline-flex size-10 items-center justify-center rounded-md border border-dashed border-white/25 bg-white/5 text-white/70 transition-colors hover:border-white/40 hover:bg-white/10 hover:text-white"
+                      >
+                        <Icon className="size-4" />
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
           <div className="relative mt-auto hidden min-h-24 flex-1 overflow-hidden border-t border-dashed border-white/20 lg:block">
             <DotGrid className="text-white/15" />
