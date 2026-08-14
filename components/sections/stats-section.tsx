@@ -23,7 +23,7 @@ const STATS: Stat[] = [
     value: "100",
     suffix: "%",
     label: "Trust us for their next project",
-    highlight: true,
+    // highlight: true,
 
   },
   {
